@@ -7,7 +7,7 @@ const app = express();
 const con = require('./models/taskModel')
 app.use(express.static('public'));
 
-app.engine('hbs', hbs({
+app.engine('hbs', hbs.engine({
     helpers: {
         isCompleted: function (status) {
             if (status == "completed") {
@@ -58,14 +58,7 @@ app.post('/', (req, res) => {
         console.log(result)
         res.redirect('/')
     })
-
-
 })
-
-// port where app is served
-app.listen(3000, () => {
-    console.log('The web server has started on port 3000');
-});
 
 app.get('/:status/:id', (req, res) => {
     console.log(req.params)
@@ -75,4 +68,21 @@ app.get('/:status/:id', (req, res) => {
         console.log(result)
         res.redirect('/')
     })
+
+});
+
+app.get('/:id', (req, res) => {
+    console.log(req.params)
+    let query = "DELETE FROM Todo WHERE task_id=" + req.params.id
+    con.query(query, (err, result) => {
+        if (err) throw err;
+        console.log(result)
+        res.redirect('/')
+    })
+
+});
+
+// port where app is served
+app.listen(3000, () => {
+    console.log('The web server has started on port 3000');
 });

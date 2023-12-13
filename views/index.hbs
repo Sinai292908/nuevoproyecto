@@ -6,16 +6,17 @@
         <button type="submit" id="submit">Add Task</button>
     </form>
     <div id="tasks_container">
-        <ul>
+        <ol>
             {{#each items}}
             {{#if (isCompleted status)}}
             <li class="completed">{{task}}</li>
-            <a href="/ongoing/{{task_id}}">Mark it as ongoing</a>
+            <a href="/ongoing/{{task_id}}">Mark it as ongoing</a>&nbsp;<a href="/{{task_id}}"><i class="fa fa-trash"></i></a>
             {{else}}
             <li class="ongoing">{{task}}</li>
-            <a href="/completed/{{task_id}}">Mark it as complete</a>
+            </i></a><a href="/completed/{{task_id}}">Mark it as
+                complete </a><a href="/{{task_id}}"><i class="fa fa-trash"></i></a>
             {{/if}}
             {{/each}}
-        </ul>
+        </ol>
     </div>
 </div>
